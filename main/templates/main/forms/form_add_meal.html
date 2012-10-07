@@ -1,0 +1,138 @@
+{% load verbatim_templatetag %}
+
+<script type="text/x-handlebars">
+<div id="form_add_meal" class="reveal-modal">
+    
+    <h4>Add A Meal</h4>
+    
+    {% verbatim %}
+    <form id="add_meal" action="#" method="POST">    	                
+                     
+        <div class="row">    
+            <div class="six columns">  
+            
+                
+                <label for="artifact_exhibition">Exhibition</label>
+                {{view Ember.TextField valueBinding="App.collectriumGalleryImportForms.item.grouping" placeholder="Grouping" id="grouping" name="grouping" }}
+                
+            </div>
+            
+            <div class="six columns">  
+            
+                <label for="artifact_title">Title</label>
+                {{view Ember.TextField valueBinding="App.collectriumGalleryImportForms.item.title" placeholder="Title" id="title" name="title" }}
+            
+            </div>
+            
+            <div class="six columns">  
+                
+                <label for="artifact_artist">Artist</label>
+                {{view Ember.TextField valueBinding="App.collectriumGalleryImportForms.item.artist" placeholder="Artist" id="artist" name="artist" }}
+            
+            </div>
+            
+            <div class="six columns">  
+            
+                <label for="artifact_date">Date</label>
+                {{view Ember.TextField valueBinding="App.collectriumGalleryImportForms.item.date" placeholder="Date" id="date" name="date" }}
+            
+            </div>
+            
+            <div class="six columns">  
+                
+                <label for="artifact_inventory">Inventory #</label>
+                {{view Ember.TextField valueBinding="App.collectriumGalleryImportForms.item.accession" placeholder="Inventory" id="inventory" name="inventory" }}
+            
+            </div>
+            
+            <div class="six columns">  
+            
+                <label for="artifact_medium">Medium</label>
+                {{view Ember.TextField valueBinding="App.collectriumGalleryImportForms.item.Medium" placeholder="Medium" id="medium" name="medium" }}
+            
+            </div>
+            
+            <div class="six columns">  
+                
+                <label for="artifact_height">Height</label>
+                {{view Ember.TextField valueBinding="App.collectriumGalleryImportForms.item.height" placeholder="Height" id="height" name="height" }}
+            
+            </div>
+            
+            <div class="six columns">  
+            
+                <label for="artifact_width">Width</label>
+                {{view Ember.TextField valueBinding="App.collectriumGalleryImportForms.item.width" placeholder="Width" id="width" name="width" }}
+            
+            </div>
+            
+            <div class="six columns">  
+                
+                <label for="artifact_depth">Depth</label>
+                {{view Ember.TextField valueBinding="App.collectriumGalleryImportForms.item.depth" placeholder="Depth" id="depth" name="depth" }}
+            
+            </div>
+            
+            <div class="six columns">  
+            
+                <label for="artifact_edition">Edition</label>
+                {{view Ember.TextField valueBinding="App.collectriumGalleryImportForms.item.edition" placeholder="Edition" id="edition" name="edition" }}
+            
+            </div>
+            
+            <div class="six columns">  
+                
+                <label for="artifact_price">Price</label>
+                {{view Ember.TextField valueBinding="App.collectriumGalleryImportForms.item.price" placeholder="Price" id="price" name="price" }}
+            
+            </div>
+            
+            <div class="six columns">
+                
+                <!--<label for="artifact_price">Image</label>
+                <input type="text" id="artifact_image" name="artifact_image" class="input-text" placeholder="Image Name">-->
+              
+            </div>
+            
+            <div class="twelve columns">
+                
+                <label for="artifact_description">Description</label>
+        		{{view Ember.TextArea valueBinding="App.collectriumGalleryImportForms.item.description" placeholder="Description" id="description" name="description" }}
+                  
+            </div>
+            
+            <div class="twelve columns">
+                
+                <label for="artifact_location">Location</label>
+        		{{view Ember.TextArea valueBinding="App.collectriumGalleryImportForms.item.location" placeholder="Location" id="location" name="location" }}
+                  
+            </div>
+            
+            <div class="twelve columns">
+                
+                <label for="artifact_signature">Signature</label>
+        		{{view Ember.TextArea valueBinding="App.collectriumGalleryImportForms.item.signature" placeholder="Signature" id="signature" name="signature" }}
+                  
+            </div>
+            
+            <div class="six columns">  
+            
+                <input type="hidden" id="artifact_id" name="artifact_id" {{ bindAttr value="App.collectriumGalleryImportForms.item.row" }} />
+                
+            </div>
+                    
+            <div class="six columns" style="text-align: right">  
+            
+                <input type="submit" class="small button" value="Save &raquo;" />   
+            
+            </div>
+          
+        </div>
+        
+    </form>
+    {% endverbatim %}
+                
+    <a class="close-reveal-modal">&#215;</a>
+    
+</div>
+</script>

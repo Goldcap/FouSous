@@ -1,30 +1,32 @@
+ {% load verbatim_templatetag %}
+ 
 <!-- ZURBar -->
 <div class="container top-bar home-border">
   <div class="attached">
     <div class="name" onclick="void(0);">
-      <span><a href="/">Fou Sous</a> <a href="#" class="toggle-nav"></a></span>
+      <span><a href="/">FouSous</a> <a href="#" class="toggle-nav"></a></span>
 		</div>
 
 		<ul class="right">
           <li class="show-for-small">
-            <a href="../index.php">Home</a>
+            <a href="#">Home</a>
           </li>
           <li>
-          <a href="grid.php" >Features</a>
+          <a href="#" >Features</a>
           </li>
           <li>
-            <a href="templates.php">Add-ons</a>
+            <a href="#">Add-ons</a>
           </li>
           <li>
-            <a href="case-nge.php" >Case Studies</a>
+            <a href="#" >Case Studies</a>
           </li>
           <li>
-            <a href="docs">Docs</a>
+            <a href="#">Docs</a>
           </li>
           <li>
-            <a href="http://github.com/zurb/foundation">GitHub</a>
+            <a href="https://github.com/Goldcap/FouSous">GitHub</a>
           </li>
-          <li class="download"><a class="small blue nice button src-download" href="download.php">Download</a></li>
+          <li class="download"><a class="small blue nice button src-download" href="download.php">iPad App</a></li>
 		</ul>
 	</div>
 </div>
@@ -35,11 +37,11 @@
   
   <div class="row top">
     <div class="eight columns">
-      <a href="http://www.zurb.com"><h4><img alt="Zurb-logo-drop-down" src="http://www.zurb.com/assets/logo/zurb-logo-drop-down-ec71ef7b6be82b12ab4a64a655377e1f.png" /> Design Great Products Faster</h4></a>
+      <a href="#"><h4><img alt="Zurb-logo-drop-down" src="http://www.zurb.com/assets/logo/zurb-logo-drop-down-ec71ef7b6be82b12ab4a64a655377e1f.png" /> Design Great Products Faster</h4></a>
     </div>
     <div class="four columns">
       <div class="right links">
-        <a href="http://www.zurb.com/about">About</a> | <a href="http://www.zurb.com/blog">ZURBlog </a> | <a href="http://www.zurb.com/sitemap">Sitemap</a>
+        <a href="#">About</a> | <a href="http://www.zurb.com/blog">ZURBlog </a> | <a href="http://www.zurb.com/sitemap">Sitemap</a>
       </div>
     </div>
   </div>
@@ -91,25 +93,32 @@
 
   <div class="row">
     <div class="twelve columns">
-      <h1>Foundation 3</h1>
-      <h4>The most advanced responsive front-end framework in the world.</h4>
+      <h4>The best way to track and rate meals, dishes, and happy full tummies.</h4>
 
-      <a href="download.php" class="large button" id="mainDownload">Download Foundation 3.1</a>
-      <a href="download.php" class="large button show-for-small" id="deviceDownload">View Download Options</a>
+      {% verbatim %}
+      <script type="text/x-handlebars">
+      {{#view App.homePageActions}}
+      <a class="large button mainDownload" {{action doRate}}>Rate Your Meal</a>
+      <a href="#" class="large button show-for-small deviceDownload" {{action doRate}}>Rate Your Meal</a>
+      
       <div id="watch">
         <section>
-          <a href="http://github.com/zurb/foundation" class="small secondary button">Watch on Github</a><span class="watchers">&#124;&#124;&#124;&#124;&#124;&#124;&#124;&#124;&#124;&#124;&#124;&#124;<small></small></span>
+          <a href="#" class="small secondary button" {{action doMeal}}>Add a Meal</a>
         </section>
         <section>
-          <a href="http://twitter.com/foundationzurb" class="small secondary button">Follow @foundationzurb</a>
+          <a href="#" class="small secondary button" {{action doDish}}>Add a Dish</a>
         </section>
       </div>
+      {{/view}}
+      </script>
+      {% endverbatim %}
+      
     </div>
   </div>
 
 </header>
 
-<section id="homepageFeatures">
+<!--<section id="homepageFeatures">
 
   <div class="row">
     <div class="nine columns">
@@ -251,34 +260,34 @@
       </ul>
     </div>
   </div>
-</section>
+</section>-->
 
 
 
 <footer class="row">
   <section class="five columns">
-    <h6><strong>Made by ZURB</strong></h6>
-    <p>Foundation is made by <a href="http://www.zurb.com/">ZURB</a>, a product design company in Campbell, California. We've put more than 14 years of experience building web products, services and websites into this framework. <a href="../about.php">Foundation Info and Goodies &rarr;</a></p>
+    <h6><strong>Made by Operis Labs</strong></h6>
+    <p>FouSous is made by <a href="http://www.operislabs.com/">Operis Labs</a>, a product development company in Brooklyn, NY. We've put more than 14 years of experience building web products, services and websites into this site. <a href="http://www.operislabs.com">Operis Info &rarr;</a></p>
   </section>
 
   <section class="three columns">
-    <h6><strong>Using Foundation?</strong></h6>
-    <p>Let us know how you're using Foundation and we might feature you as an example!<br /><a href="mailto:foundation@zurb.com?subject=I'm%20using%20Foundation">Get in touch &rarr;</a></p>
+    <h6><strong>Using FouSous?</strong></h6>
+    <p>Let us know how you're using FouSous and we might feature you as an example!<br /><a href="mailto:amadsen@operislabs.com?subject=I'm%20using%20FouSous">Get in touch &rarr;</a></p>
   </section>
 
   <section class="four columns">
     <h6><strong>Need some help?</strong></h6>
-    <p class="support">For answers or help visit the <a href="docs/support.php">Support page</a>.</p>
+    <p class="support">For answers or help visit the <a href="#">Support page</a>.</p>
 
     <ul class="link-list">
     	<li>
-  	    <a href="http://www.facebook.com/ZURB" target="_blank"><span class="glyph social">d</span></a>
+  	    <a href="http://www.facebook.com/goldcapX" target="_blank"><span class="glyph social">d</span></a>
   		</li>
   		<li>
-        <a href="https://plusone.google.com/_/+1/confirm?url=http://foundation.zurb.com&title=Foundation%20from%20ZURB" target="_blank"><span class="glyph social">l</span></a>
+        <a href="https://plusone.google.com/_/+1/confirm?url=http://www.operislabs.com&title=Operis%20Labs" target="_blank"><span class="glyph social">l</span></a>
   		</li>
   		<li>
-  			<a href="http://www.twitter.com/foundationzurb" target="_blank"><span class="glyph social">e</span></a>
+  			<a href="https://twitter.com/goldcap" target="_blank"><span class="glyph social">e</span></a>
   		</li>
   	</ul>
   
@@ -289,8 +298,7 @@
   <div class="row">
     
     <div class="eight columns">
-      <h5>Stay on top of what's happening in responsive design with Responsive Reading.</h5>
-      <p>Curious? <a href="http://createsend.com/t/y-F96435232C4163B3">Read Last Month's Edition &raquo;</a></p>
+      
     </div>
   
     <div class="four columns">
@@ -310,16 +318,15 @@
 <div id="copyright">
   <div class="row">
     <div class="four columns">
-      <p>Site content &copy; 2012 ZURB, inc.</p>
+      <p>Site content &copy; 2012 Operis Labs, inc.</p>
     </div>
     <div class="eight columns">
       <ul class="link-list right">
-        <li><a href="index.php">Home</a></li>
-        <li><a href="download.php">Download</a></li>
-        <li><a href="docs/index.php">Documentation</a></li>
-        <li><a href="docs/installing.php">Install</a></li>
-        <li><a href="about.php">About</a></li>
-        <li><a href="http://feeds.feedburner.com/zurb/blog">Subscribe to the ZURBlog</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Download</a></li>
+        <li><a href="#">Documentation</a></li>
+        <li><a href="#">Install</a></li>
+        <li><a href="#">About</a></li>
       </ul>
     </div>
   </div>

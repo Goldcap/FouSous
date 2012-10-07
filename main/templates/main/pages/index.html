@@ -16,8 +16,15 @@
 
   {% include "main/components/home.html" %}
   
-  </body>
+  {% include "main/forms/form_add_dish.html" %}
+  {% include "main/forms/form_add_meal.html" %}
+  {% include "main/forms/form_rate_meal.html" %}
   
+  </body>
+                                               
+  {% include "main/components/collectrium.javascripts.html" %}
+  {% include "main/components/global.javascripts.html" %}   
+  {% include "main/components/form.javascripts.html" %}
   {% include "main/components/javascripts.html" %}
   
 </html>

@@ -1,5 +1,9 @@
 # Django settings for public project.
+import os
+import sys
+import tempfile
 
+PROJECT_DIR = os.path.dirname(os.path.abspath( __file__ ))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -11,7 +15,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'fousous',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
         'PASSWORD': '1hsvy5qb',                  # Not used with sqlite3.
@@ -103,6 +107,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'public.urls'
 
 TEMPLATE_DIRS = (
+    os.path.join(PROJECT_DIR, "main", "templatetags"),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -116,6 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles', 
     'public.main',
+    'south',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
