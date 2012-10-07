@@ -48,7 +48,7 @@ App.homePageForms = Em.Object.create({
     $('#form_rate_meal').reveal({
        closeonbackgroundclick: true,              //if you click background will modal close?
        dismissmodalclass: 'close-reveal-modal',
-       close: scope.set('action',null)
+       close: scope.clear()
     });
   },
   
@@ -75,7 +75,7 @@ App.homePageForms = Em.Object.create({
     $('#form_add_meal').reveal({
        closeonbackgroundclick: true,              //if you click background will modal close?
        dismissmodalclass: 'close-reveal-modal',
-       close: scope.set('action',null)
+       close: scope.clear()
     });
   },
   
@@ -102,7 +102,7 @@ App.homePageForms = Em.Object.create({
     $('#form_add_dish').reveal({
        closeonbackgroundclick: true,              //if you click background will modal close?
        dismissmodalclass: 'close-reveal-modal',
-       close: scope.set('action',null)
+       close: scope.clear()
     });
   },
   
@@ -124,13 +124,13 @@ App.homePageForms = Em.Object.create({
      
     switch(event) {
       case "rate_meal_success": 
-        
+        App.homePageControl.showError(result.response.result,result.response.title,result.response.message); 
         break;
       case "add_dish_success":
-        
+        App.homePageControl.showError(result.response.result,result.response.title,result.response.message); 
         break;
       case "add_meal_success":
-        
+        App.homePageControl.showError(result.response.result,result.response.title,result.response.message); 
         break;
       default:
         break;
@@ -140,14 +140,10 @@ App.homePageForms = Em.Object.create({
     
     //this.clear();
     
-    if (result != null) {
-        App.homePageControl.showError(result.response.result,result.response.title,result.response.message); 
-    }
   }.observes('connection.status'),
   
   clear: function() {       
     this.set('item',null);
-    this.set('facet',null);
     this.set('action',null);
     this.set('result',null);
   },

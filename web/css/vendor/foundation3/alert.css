@@ -1,0 +1,42 @@
+/* CSS Document */
+
+
+/* ADDED FOR COLLECTRIUM SPECIFIC VIEWS */
+.alert-box {
+  position: fixed !important;
+  float: left;
+  left: 50%;
+  top: 180px;
+  width: 740px;
+  margin-left: -390px;
+  z-index: 1000;
+  text-align: center;
+  padding: 15px !important;
+}
+
+.alert-box h5 {
+  color: white;
+  font-size: 28px;
+  line-height: 30px;
+  margin-bottom: 5px;
+}
+
+.alert-box p {
+  color: white;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.alert-box.notice {
+    background-color: #6699FF;
+    color: #FFFFFF;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+}
+
+.alert_visible {
+    display: block;    
+}
+
+.alert_invisible {
+    display: none !important;    
+}

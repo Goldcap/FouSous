@@ -1,0 +1,10 @@
+{% load verbatim_templatetag %}
+
+{% verbatim %}
+<script type="text/x-handlebars">
+    {{#view Collectrium.errorItemView contentBinding="Collectrium.Error"}}
+      <h5>{{view.content.errors.item.title}}</h5>  			        
+      {{if message}}<p id="alert_message">{{view.content.errors.item.message}}</p>{{endif}}
+    {{/view}}
+</script>
+{% endverbatim %}

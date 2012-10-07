@@ -8,6 +8,10 @@ from main import urls as main_urls
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'main.views.main', name='main'),
+    url(r'^services/api/v1/meal_element/add/$', 'services.views.add_meal_element', name='add_meal_element'),
+    url(r'^services/api/v1/meal/add/$', 'services.views.add_meal', name='add_meal'),
+    url(r'^services/api/v1/meal/rate/$', 'services.views.rate_meal', name='rate_meal'),
+    
     # url(r'^public/', include('public.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
