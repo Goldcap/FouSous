@@ -1,0 +1,28 @@
+{
+  "name": "ember",
+  "description": "Ember - JavaScript Application Framework",
+  "summary": "Ember - JavaScript Application Framework",
+  "homepage": "http://github.com/emberjs/ember.js",
+  "author": "Charles Jolley",
+  "version": "1.0.pre",
+
+  "dependencies": {
+    "spade":                 "~> 1.0.0",
+    "ember-runtime": "1.0.pre",
+    "ember-views": "1.0.pre",
+    "ember-states": "1.0.pre",
+    "ember-routing": "1.0.pre",
+    "ember-handlebars": "1.0.pre"
+  },
+
+  "directories": {
+    "lib": "lib"
+  },
+
+  "bpm:build": {
+    "bpm_libs.js": {
+      "files": ["lib"],
+      "modes": "*"
+    }
+  }
+}

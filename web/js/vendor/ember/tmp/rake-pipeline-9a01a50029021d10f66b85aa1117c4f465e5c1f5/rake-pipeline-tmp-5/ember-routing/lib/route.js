@@ -1,0 +1,1 @@
+minispade.register('ember-routing/route', "(function() {minispade.require('ember-routing/routable');\n\n/**\n  @class\n  @extends Ember.State\n  @extends Ember.Routable\n*/\nEmber.Route = Ember.State.extend(Ember.Routable);\n\n})();\n//@ sourceURL=ember-routing/route");

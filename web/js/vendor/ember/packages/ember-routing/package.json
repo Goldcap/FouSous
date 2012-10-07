@@ -1,0 +1,32 @@
+{
+  "name": "ember-routing",
+  "summary": "Ember Routing",
+  "description": "The Ember routing system",
+  "homepage": "http://emberjs.com",
+  "author": "Yehuda Katz",
+  "version": "1.0.pre",
+
+  "directories": {
+    "lib": "lib"
+  },
+
+  "dependencies": {
+    "spade":             "~> 1.0",
+    "ember-views": "1.0.pre",
+    "ember-states": "1.0.pre"
+  },
+
+  "dependencies:development": {
+    "spade-qunit": "~> 1.0.0"
+  },
+
+  "bpm:build": {
+
+    "bpm_libs.js": {
+      "files": ["lib"],
+      "modes":        "*"
+    }
+  }
+}
+
+

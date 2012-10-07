@@ -1,0 +1,1 @@
+minispade.register('ember-routing/location', "(function() {minispade.require('ember-views');\nminispade.require('ember-routing/location/api');\nminispade.require('ember-routing/location/none_location');\nminispade.require('ember-routing/location/hash_location');\nminispade.require('ember-routing/location/history_location');\n\n})();\n//@ sourceURL=ember-routing/location");

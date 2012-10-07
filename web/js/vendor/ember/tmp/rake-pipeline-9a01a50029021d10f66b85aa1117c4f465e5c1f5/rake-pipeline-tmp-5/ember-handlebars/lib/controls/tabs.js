@@ -1,0 +1,1 @@
+minispade.register('ember-handlebars/controls/tabs', "(function() {minispade.require(\"ember-handlebars/controls/tabs/tab_container_view\");\nminispade.require(\"ember-handlebars/controls/tabs/tab_pane_view\");\nminispade.require(\"ember-handlebars/controls/tabs/tab_view\");\n\n\n})();\n//@ sourceURL=ember-handlebars/controls/tabs");

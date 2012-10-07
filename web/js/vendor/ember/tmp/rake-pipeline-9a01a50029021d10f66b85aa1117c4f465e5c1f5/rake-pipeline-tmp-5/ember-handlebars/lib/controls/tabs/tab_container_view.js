@@ -1,0 +1,1 @@
+minispade.register('ember-handlebars/controls/tabs/tab_container_view', "(function() {Ember.TabContainerView = Ember.View.extend({\n  init: function() {\n    Ember.deprecate(\"Ember.TabContainerView is deprecated and will be removed from future releases.\");\n    this._super();\n  }\n});\n\n})();\n//@ sourceURL=ember-handlebars/controls/tabs/tab_container_view");

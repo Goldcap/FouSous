@@ -1,0 +1,1 @@
+minispade.register('ember-runtime/controllers', "(function() {minispade.require('ember-runtime/controllers/array_controller');\nminispade.require('ember-runtime/controllers/object_controller');\nminispade.require('ember-runtime/controllers/controller');\n\n})();\n//@ sourceURL=ember-runtime/controllers");

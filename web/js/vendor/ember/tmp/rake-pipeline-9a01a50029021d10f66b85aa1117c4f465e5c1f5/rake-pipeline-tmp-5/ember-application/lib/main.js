@@ -1,0 +1,1 @@
+minispade.register('ember-application', "(function() {minispade.require('ember-views');\nminispade.require('ember-states');\nminispade.require('ember-routing');\nminispade.require('ember-application/system');\n\n})();\n//@ sourceURL=ember-application");
