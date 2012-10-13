@@ -3,44 +3,54 @@
 <script type="text/x-handlebars">
 <div id="form_add_dish" class="reveal-modal">
     
-    <h4>Add A Dish</h4>
+    <dl class="tabs">
+      <dd class="active"><a id="addDish" href="#addDish"><h4>Add A Dish</h4></a></dd>
+      <dd><a id="listDish" href="#listDish"><h4>My Dishes</h4></a></dd>
+    </dl>
     
+    <ul class="tabs-content">
     {% verbatim %}
-    <form id="add_dish" action="#" method="POST" onsubmit="return false">    	                
-                     
-        <div class="row">    
+    <li id="addDishTab" class="active">
+      <form id="add_dish" action="#" method="POST" onsubmit="return false">    	                
+                       
+          <div class="row">    
+              
+              <div class="twelve columns">  
+              
+                  
+                  <label for="name">Name</label>
+                  {{view Ember.TextField valueBinding="App.homePageForms.item.name" placeholder="Name" id="name" name="name" }}
+                  
+                  <label for="type">Type</label>
+                  {{view Ember.Select
+                    contentBinding="App.homePageControl.meal_types"
+                    valueBinding="App.homePageControl.forms.item.fk_meal_element_type_id"
+                    optionLabelPath="content.name"
+                    optionValuePath="content.id"
+                    prompt="Select..."  
+                  }}
+                  
+              </div>
+           
+           </div>
+           
+           <div class="row">    
+                      
+              <div class="twelve columns" style="text-align: right">  
+              
+                  <input type="submit" class="small button" value="Save &raquo;" />   
+              
+              </div>
             
-            <div class="twelve columns">  
-            
-                
-                <label for="name">Name</label>
-                {{view Ember.TextField valueBinding="App.homePageForms.item.name" placeholder="Name" id="name" name="name" }}
-                
-                <label for="type">Type</label>
-                {{view Ember.Select
-                  contentBinding="App.homePageControl.meal_types"
-                  valueBinding="App.homePageControl.form.item.fk_meal_element_type_id"
-                  optionLabelPath="content.name"
-                  optionValuePath="content.id"
-                  prompt="Select..."  
-                }}
-                
-            </div>
-         
-         </div>
-         
-         <div class="row">    
-                    
-            <div class="twelve columns" style="text-align: right">  
-            
-                <input type="submit" class="small button" value="Save &raquo;" />   
-            
-            </div>
+          </div>
           
-        </div>
-        
-    </form>
+      </form>
+    </li>
+    <li id="listDishTab">
+        {{view App.mealElementListView}}
+    </li>
     {% endverbatim %}
+    </ul>
                 
     <a class="close-reveal-modal">&#215;</a>
     

@@ -1,0 +1,151 @@
+{% load verbatim_templatetag %}
+
+<script type="text/x-handlebars">
+<div id="form_login" class="reveal-modal">
+    
+    <h4>Login</h4>
+    
+    {% verbatim %}
+    <form id="login" action="#" method="POST" onsubmit="return false">    	                
+                     
+        <div class="row">    
+            
+            <div class="twelve columns">  
+            
+                
+                <label for="name">Name</label>
+                {{view Ember.TextField valueBinding="App.homePageControl.signup.name" placeholder="Name" }}
+                
+                <label for="type">Password</label>
+                {{view Ember.TextField type="password" valueBinding="App.homePageControl.signup.password" placeholder="Password" }}
+                
+                
+            </div>
+         
+         </div>
+         
+         <div class="row">    
+                    
+            <div class="twelve columns" style="text-align: right">  
+            
+                <input type="submit" class="small button" value="Login &raquo;" />   
+            
+            </div>
+          
+        </div>
+        
+        <div class="row">    
+            
+            <div class="twelve columns">  
+                
+                {{#view App.loginSignupClick}}
+                Need an account? <a {{action showSignup}}>Click here to signup...</a>
+                {{/view}}
+                
+            </div>
+         
+         </div>
+        
+    </form>
+    {% endverbatim %}
+                
+    <a class="close-reveal-modal">&#215;</a>
+    
+</div>
+</script>
+
+<script type="text/x-handlebars">
+<div id="form_signup" class="reveal-modal">
+    
+    <h4>Signup</h4>
+    
+    {% verbatim %}
+    <form id="signup" action="#" method="POST" onsubmit="return false">    	                
+                     
+        <div class="row">    
+            
+            <div class="twelve columns">  
+            
+                
+                <label for="name">Name</label>
+                {{view Ember.TextField valueBinding="App.homePageControl.signup.name" placeholder="Name" }}
+                
+                <label for="type">Password</label>
+                {{view Ember.TextField type="password" valueBinding="App.homePageControl.signup.password" placeholder="Password" }}
+                
+                <label for="type">Confirm Password</label>
+                {{view Ember.TextField type="password" valueBinding="App.homePageControl.signup.password_conf" placeholder="Confirm" }}
+                
+                
+                
+            </div>
+         
+         </div>
+         
+         <div class="row">    
+                    
+            <div class="twelve columns" style="text-align: right">  
+            
+                <input type="submit" class="small button" value="Signup &raquo;" />   
+            
+            </div>
+          
+        </div>
+        
+        <div class="row">    
+            
+            <div class="twelve columns">  
+                
+                {{#view App.signupLoginClick}}
+                Have an account? <a {{action showLogin}}>Click here to login...</a>
+                {{/view}}
+                
+            </div>
+         
+         </div>
+        
+    </form>
+    {% endverbatim %}
+                
+    <a class="close-reveal-modal">&#215;</a>
+    
+</div>
+</script>
+
+<script type="text/x-handlebars">
+<div id="form_logout" class="reveal-modal">
+    
+    <h4>Logout</h4>
+    
+    {% verbatim %}
+    <form id="logout" action="#" method="POST" onsubmit="return false">    	                
+                     
+        <div class="row">    
+            
+            <div class="twelve columns">  
+            
+                
+                You're sure you want to logout?
+                
+            </div>
+         
+         </div>
+         
+         <div class="row">    
+                    
+            <div class="twelve columns" style="text-align: right">  
+            
+                <input type="submit" class="small button error" value="Yes, Logout &raquo;" />   
+            
+            </div>
+          
+        </div>
+        
+        
+    </form>
+    {% endverbatim %}
+                
+    <a class="close-reveal-modal">&#215;</a>
+    
+</div>
+</script>

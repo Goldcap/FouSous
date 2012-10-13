@@ -1,0 +1,32 @@
+/* CSS Document */
+.menu-element {
+    width: 100%;
+}
+
+.menu-element ul {
+    width: 100%;
+}
+
+.menu-element ul li {
+    float: right;
+}
+
+.menu-element ul li:first-child {
+    float: left;
+}
+
+.menu-element ul li:nth-last-child(2) {
+    width: 16px !important;
+    height: 16px !important;
+    background-image: url('/web/images/sprites.png');
+    background-repeat: no-repeat;
+    background-position: -16px 0px;
+}
+
+.menu-element ul li:last-child {
+    width: 16px !important;
+    height: 16px !important;
+    background-image: url('/web/images/sprites.png');
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}

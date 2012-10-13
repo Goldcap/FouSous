@@ -4,9 +4,9 @@ Collectrium.Collection = Em.ArrayProxy.extend({
     item:null,
     args: null,
     options: null,
-    
+
     params: null,
-    
+
     event: null,
     step: null,
     response: null,
@@ -18,7 +18,9 @@ Collectrium.Collection = Em.ArrayProxy.extend({
     currentReq: null,
     url: null,
     unique: "",
+    debug: false,
     
+
     //If true, his will empty the collection AFTER a successful response,
     //Depending on the clearmethod
     clearpost: false,
@@ -28,7 +30,7 @@ Collectrium.Collection = Em.ArrayProxy.extend({
     clearmethod: 'wipe',
     clearindex: 'id',
     clearstate: 0,
-    
+
     pagination: null,
     state: null,
     cancelled: false,
@@ -36,44 +38,48 @@ Collectrium.Collection = Em.ArrayProxy.extend({
     //Set by the assigning method
     //Use to trigger post-assigment methods
     loaded: false,
+    //This will place the firstobject of the array in the "item", once loaded
+    loadFirstItem: false,
     
+
     //For Filtering Results
-    filter: null,
-    filter_val: null,
-    
+    filter:null,
+    filter_val:null,
+
     //Worker Property
     //Used by observable "sum"
     summer: null,
-    
+
     init: function() {
-        
+
         this._super();
-        
+
         this.set('content',[]);
-        this.set('unique',"");
+        this.set('unique','');
+        this.set('debug',false);
         this.set('pagination',Collectrium.Paginator.create());
         this.set('params',Collectrium.Item.create(Collectrium.Serializable,{}));
-        
-    
+
+
     },
-    
-    content_filtered: function() {
+
+    content_filtered:function () {
         if ((this.get('filter')) && (this.get('filter_val'))) {
-            return this.get('content').filterProperty(this.get('filter'),this.get('filter_val'));
+            return this.get('content').filterProperty(this.get('filter'), this.get('filter_val'));
         } else {
             return this.get('content');
         }
     }.property('content.@each','filter_val'),
-    
+
     readArgs: function() {
-        
+
         //console.log(this.get('pagination.rpp'));
         this.get('params').set("rpp",this.get('pagination.rpp'));
-        this.get('params').set("page",this.get('pagination.page')); 
+        this.get('params').set("page",this.get('pagination.page'));
         return this.get('params').serialize();
-        
+
     },
-    
+
     refresh: function() {
         //console.log("@refresh");
         if (this.get('pagination.page') == null) return;
@@ -83,7 +89,7 @@ Collectrium.Collection = Em.ArrayProxy.extend({
         this.set('canseek',false);
         this.paginate();
     },
-    
+
     paginate: function( refresh ) {
         //console.log("@paginate page is: " + this.get('pagination.page'));
         //We're changing pages, so clear our content
@@ -91,7 +97,7 @@ Collectrium.Collection = Em.ArrayProxy.extend({
         if (this.get('page') != this.get('pagination.page')) {
             this.set('clearstate',this.get('content.length'));
         }
-        
+
         this.set('page',this.get('pagination.page'));
         this.set('step',null);
         if (! this.get('clearpost')) {
@@ -103,22 +109,22 @@ Collectrium.Collection = Em.ArrayProxy.extend({
         this.set('step',null);
         this.fetch();
     },
-    
+
     unfetch: function() {
         this.set('content',[]);
         this.pagination.set('page',1);
     },
-    
+
     fetch: function() {
         //console.log("@fetch:: state is " + this.get('state'));
         //console.log("@fetch:: step is " + this.get('step'));
-        
+
         if ((this.get('state') != 'eof') && (this.get('step') == null)) {
             //console.log("Reading with " + args);
             this.read(null, this.readArgs(), "get_items" );
         }
     },
-    
+
     complete: function() {
         //$(".ab_loading").fadeOut();
         if (this.get('step') != 'success') return;
@@ -127,47 +133,52 @@ Collectrium.Collection = Em.ArrayProxy.extend({
     		this.get('pagination').render(this.get('meta'));
     	}
     }.observes('step'),
-    
+
     //Adds a new element to the collection
     push: function( vals ) {
         var anObj = this.add(vals);
         this.pushObject(anObj);
     },
-    
+
     pop: function() {
       return this.removeObject(this.get('firstObject'));
     },
-  
+
     //Adds a new element to the collection
     add: function( vals ) {
         var anObj = this.type.create();
         if (typeof vals != 'undefined') {
             for(var key in vals){
-                // console.log("ADDING " + key + " of value " + vals[key]);
+                if (this.get('debug'))
+                    console.log("ADDING " + key + " of value " + vals[key]);
                 anObj.set(key,vals[key]);
             }
         }
+        //console.log(anObj);
         return anObj;
     },
-    
+
     //Adds a new element to the collection
     update: function( anObj, vals ) {
         if (typeof vals != 'undefined') {
             for(var key in vals){
-                // console.log("ADDING " + key + " of value " + vals[key]);
+                if (this.get('debug'))
+                    console.log("ADDING " + key + " of value " + vals[key]);
                 anObj.set(key,vals[key]);
             }
         }
         return anObj;
     },
-    
+
     //Adds a new element with vals to the collection
     assign: function() {
+        
         var doprocess = true;
         if (this.step != "success") { return; }
         else if (this.objects === null) { doprocess = false; }
         else if (this.objects.length === 0) { doprocess = false; }
         var removal = [];
+        
         if (this.get('clearpost')) {
             if ((this.get('clearmethod') == 'wipe') || (this.get('clearstate') > 0)) {
                 //console.log("WIPE");
@@ -186,154 +197,172 @@ Collectrium.Collection = Em.ArrayProxy.extend({
             //If we enforce a uniqueness on inbound content, and find a dupe
             //Skip it
             if ((this.get('unique') != '') && (this.findProperty(this.get('unique'),this.objects[i][this.get('unique')]))) {
-                //console.log("SKIPPING ADDING " + this.objects[i]);
+                if (this.get('debug'))
+                    console.log("SKIPPING ADDING " + this.objects[i]);
             } else {
-                //console.log("ADDING " + this.objects[i] + " of type " + this.get('type') + " at " + i);
+                if (this.get('debug'))
+                    console.log("ADDING " + this.objects[i] + " of type " + this.get('type') + " at " + i);
                 if ((this.get('clearpost')) && (this.get('clearmethod') == 'collate')) {
                     if (this.findProperty(this.get('clearid'),this.objects[i][this.get('clearid')])) {
-                        //console.log("Found " + this.get('clearid') + " with " + this.objects[i][this.get('clearid')])
+                        if (this.get('debug'))
+                            console.log("Found " + this.get('clearid') + " with " + this.objects[i][this.get('clearid')])
                         var theItem = this.findProperty(this.get('clearid'),this.objects[i][this.get('clearid')]);   
                         this.update(theItem,this.objects[i]);
                         var found = false;
                         for (j=0;j<removal.length;j++) {
-                            //console.log(removal[j] + "==" + this.objects[i][this.get('clearid')]);
+                            if (this.get('debug'))
+                                console.log(removal[j] + "==" + this.objects[i][this.get('clearid')]);
                             if(removal[j]==this.objects[i][this.get('clearid')]){ 
+                                if (this.get('debug'))
+                                    console.log("FOUND!");
                                 //console.log("FOUND!");
                                 removal.splice(j,1);
                                 break;
                             }
                         }
                     } else {
-                        //console.log("NOT FOUND SO ADDING!");
+                        if (this.get('debug'))
+                            console.log("NOT FOUND SO ADDING!");
                         var anObj = this.add(this.objects[i]);
                         this.pushObject(anObj);
                     }
                 } else {
-                    //console.log("BASE ADDING NOT FOUND SO ADDING!");
+                    if (this.get('debug'))
+                        console.log("BASE ADDING NOT FOUND SO ADDING!");
                     var anObj = this.add(this.objects[i]);
+                    //console.log(anObj);
                     this.pushObject(anObj);
                 }
             }
         }}
-        
+        //console.log(this.get('content'));
         //console.log(removal);
         for(var k=0;k<removal.length;k++){
             if (removal[k] == '') break;
-            //console.log("REMOVAL FOUND SO REMOVING!");
+            if (this.get('debug'))
+                console.log("REMOVAL FOUND SO REMOVING!");
             var theItem = this.findProperty(this.get('clearid'),parseInt(removal[k]));
             this.removeObject(theItem);
         }
-        //console.log(this.get('length'));
+        if (this.get('debug'))
+            console.log("Length is " + this.get('length'));
         //this.set('item',this.get('firstObject'));
-        
+
         this.set('loaded',true);
         this.clear();
-        
+
     }.observes('step'),
     
+    assignFirstObject: function() {
+        //console.log("HERE");
+        if (this.get('loadFirstItem')) {
+            this.set('item',this.get('firstObject'));
+        }
+    }.observes('loaded'),
+    
     //A Quick Way to Assign Data without AJAX
-    populate: function(objects) {
+    populate:function (objects, meta) {
         //This wont' do anything, since objects are already set
         //console.log(objects);
         this.set('loaded',false);
-        this.set('meta',{'totalresults':objects.length,'current_results':objects.length});
+        //If we want to populate collection's meta too
+        if (meta) this.set('meta',meta);
         this.set('objects',objects);
-        this.set('step','success');
         this.set('response',{'result':'success'});
-        this.assign(); 
+        this.set('step','success');
     },
-    
-    getItemByProperty: function(property,value,index) {
-        var thitem = this.findProperty(property,value);
+
+    getItemByProperty:function (property, value, index) {
+        var thitem = this.findProperty(property, value);
         if (thitem) {
-            this.set('item',thitem);
+            this.set('item', thitem);
             return thitem;
         }
     },
-    
+
     getListByProperty: function(property,value,index) {
         var thitems = this.filterProperty(property,value);
         if (thitems) {
             return thitems;
         }
     },
-    
+
     read: function( url, args, event ) {
-        
+
         this.set('loaded',false);
-        
+
         if ((url == null) && (this.url != null)) {
             url = this.url;
         }
         if (this.step != null) return;
-       
-        this.set('step','transit');
+
+        this.set('step', 'transit');
         this.event = event;
         this.args = args;
-        
-        var data = $.extend( this.args , this.options );
-        
+
+        var data = $.extend(this.args, this.options);
+
         this.currentReq = $.ajax({
-			type: 'GET',
-			url: url,
-			data: $.param(data,true),
-			dataType: 'json',
-			context: this,
-            timeout: this.onTimeout,
-			complete: this.onComplete,
-			success: this.onSuccess,
-			error: this.onFailure
-		});
-    
+            type:'GET',
+            url:url,
+            data:$.param(data, true),
+            dataType:'json',
+            context:this,
+            timeout:this.onTimeout,
+            complete:this.onComplete,
+            success:this.onSuccess,
+            error:this.onFailure
+        });
+
     },
-    
+
     clear: function() {
         this.set('step',null);
         //console.log("@clear:: step is " + this.get('step'));
     },
-    
-    cancel: function() {
+
+    cancel:function () {
         if (this.currentReq != null) {
             this.currentReq.abort();
         }
         this.clear();
     },
-    
-    onComplete: function(response) {
+
+    onComplete:function (response) {
         //console.log("COLLECTION COMPLETE " + this.type);
-        $(this).trigger(this.event+'_complete', response);
+        $(this).trigger(this.event + '_complete', response);
     },
-    
-    onSuccess: function(response) {
+
+    onSuccess:function (response) {
         //console.log("COLLECTION SUCCESS " + this.type);
-        this.set('response',response.response);
-        this.set('meta',response.meta);
-        this.set('objects',response.objects);
-        $(this).trigger(this.event+'_success', response);
-        this.set('step',response.response.result);
+        this.set('response', response.response);
+        this.set('meta', response.meta);
+        this.set('objects', response.objects);
+        $(this).trigger(this.event + '_success', response);
+        this.set('step', response.response.result);
     },
-    
-    onFailure: function(response) {
+
+    onFailure:function (response) {
         //console.log("COLLECTION FAILURE " + this.type);
-        $(this).trigger(this.event+'_failure', response);
-        this.set('step','failure');
+        $(this).trigger(this.event + '_failure', response);
+        this.set('step', 'failure');
     },
-    
-    onTimeout: function(response) {
+
+    onTimeout:function (response) {
         //console.log("COLLECTION TIMEOUT " + this.type);
-        $(this).trigger(this.event+'_timeout', response);
-        this.set('step','failure');
+        $(this).trigger(this.event + '_timeout', response);
+        this.set('step', 'failure');
     },
-    
-    sum: function() {
+
+    sum:function () {
         // use reduce function on Ember.Enumerable https://github.com/emberjs/ember.js/blob/master/packages/ember-runtime/lib/mixins/enumerable.js#L497-537
         var sumCounter = this.get('summer');
-        var sum = this.collection.reduce(function(prevVal, item) {
+        var sum = this.collection.reduce(function (prevVal, item) {
             // prevVal is NaN for the first iteration
             //console.log(prevVal);
             //console.log(parseInt(item.get('amount_converted')));
             return (prevVal || 0) + parseInt(item.get(sumCounter));
-             
+
         });
         // if there are no numbers, sum is undefined
         return (sum || 0);

@@ -10,14 +10,20 @@
 from django.db import models
 
 class MealType(models.Model):
-    id = models.IntegerField(primary_key=True)
     meal_type_name = models.CharField(max_length=765, blank=True)
     meal_type_date_created = models.DateTimeField(null=True, blank=True)
     class Meta:
         db_table = u'meal_type'
+
+class MealElement(models.Model):
+    meal_element_name = models.CharField(max_length=765, blank=True)
+    fk_meal_element_type_id = models.IntegerField(null=True, blank=True)
+    fk_user_id = models.IntegerField(null=True, blank=True)
+    meal_element_date_created = models.DateTimeField(null=True, blank=True)
+    class Meta:
+        db_table = u'meal_element'
         
 class Meal(models.Model):
-    id = models.IntegerField(primary_key=True)
     meal_name = models.CharField(max_length=765, blank=True)
     meal_date = models.DateTimeField(null=True, blank=True)
     meal_date_created = models.DateTimeField(null=True, blank=True)
@@ -27,17 +33,7 @@ class Meal(models.Model):
     class Meta:
         db_table = u'meal'
 
-class MealElement(models.Model):
-    id = models.IntegerField(primary_key=True)
-    meal_element_name = models.CharField(max_length=765, blank=True)
-    fk_meal_element_type_id = models.IntegerField(null=True, blank=True)
-    fk_user_id = models.IntegerField(null=True, blank=True)
-    meal_element_date_created = models.DateTimeField(null=True, blank=True)
-    class Meta:
-        db_table = u'meal_element'
-
 class MealMealElement(models.Model):
-    id = models.IntegerField(primary_key=True)
     fk_meal_id = models.ForeignKey(Meal)
     fk_meal_element_id = models.ForeignKey(MealElement)
     class Meta:
